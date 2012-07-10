@@ -1,0 +1,99 @@
+<head>
+    <title>Boardz!</title>
+</head>
+
+<body>
+    {{> menu}}
+    <div class="container-fluid" id="container">
+    </div>
+</body>
+
+<template name="menu">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#/">Boardz!</a>
+
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li {{#if page_is "home"}}class="active"{{/if}}><a href="#/">Home</a></li>
+              <li {{#if page_is "about"}}class="active"{{/if}}><a href="#/about">About</a></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+</template>
+
+<template name="home">
+    <div class="row">
+        <div class="span12">
+            <div class="hero-unit">
+                <h1>Welcome to Boardz!</h1>
+
+                <p>This is a sample project to learn more about meteor framework.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span4 offset4">
+            <div class="page-header">
+                <h1>Avaibale Boards!</h1>
+            </div>
+            <ul class="nav nav-tabs nav-stacked">
+                {{#each boards}}
+                    <li><a href="#/boards/{{name}}">{{title}}</a></li>
+                {{/each}}
+            </ul>
+            <a class="btn" href="#/new-board">Add board</a>
+            <br /><br />
+
+            <form class="well" action="#/create" id="create-board-form" style="display: none">
+                <a class="close">&times;</a>
+                <div class="page-header">
+                    <h2>Add board</h2>
+                </div>
+                <label>Title</label>
+                <input type="text" class="span3" placeholder="Type something…">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</template>
+
+<template name="boards">
+    <div class="row-fluid">
+        <div class="span4">
+            <div class="well">
+                <div class="page-header">
+                    <h1>To do</h1>
+                </div>
+
+                <a href="#">Add a card...</a>
+            </div>
+        </div>
+        <div class="span4">
+            <div class="well">
+                <div class="page-header">
+                    <h1>Doing</h1>
+                </div>
+
+                <a href="#">Add a card...</a>
+            </div>
+        </div>
+        <div class="span4">
+            <div class="well">
+                <div class="page-header">
+                    <h1>Done</h1>
+                </div>
+
+                <a href="#">Add a card...</a>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="about">
+    About page!
+</template>
