@@ -4,9 +4,14 @@
 
 <body>
     {{> menu}}
-    <div class="container-fluid" id="container">
-    </div>
+    {{> main}}
 </body>
+
+<template name="main">
+    <div class="container-fluid" id="container">
+        {{{content}}}
+    </div>
+</template>
 
 <template name="menu">
     <div class="navbar navbar-fixed-top">
@@ -46,31 +51,42 @@
                     <li><a href="#/boards/{{name}}">{{title}}</a></li>
                 {{/each}}
             </ul>
-            <a class="btn" href="#/new-board">Add board</a>
+            <a class="btn add-board">Add board</a>
             <br /><br />
 
-            <form class="well" action="#/create" id="create-board-form" style="display: none">
+            <form class="well create-board-form" action="#/create" id="create-board-form" style="display: none">
                 <a class="close">&times;</a>
                 <div class="page-header">
                     <h2>Add board</h2>
                 </div>
                 <label>Title</label>
-                <input type="text" class="span3" placeholder="Type something…">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <input type="text" class="span3 board-title" name="board-title" placeholder="Type something…">
+                <button type="submit" class="btn btn-primary">Create board</button>
             </form>
         </div>
     </div>
 </template>
 
 <template name="boards">
+    {{#with board}}
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="page-header">
+                <h1>{{ title }}</h1>
+            </div>
+        </div>
+    </div>
     <div class="row-fluid">
         <div class="span4">
             <div class="well">
                 <div class="page-header">
                     <h1>To do</h1>
                 </div>
+                {{#each todo}}
+                    {{> card}}
+                {{/each}}
 
-                <a href="#">Add a card...</a>
+                <a href="javascript:void(0);" class="add-card" data-column="todo">Add a card...</a>
             </div>
         </div>
         <div class="span4">
@@ -78,8 +94,11 @@
                 <div class="page-header">
                     <h1>Doing</h1>
                 </div>
+                {{#each doing}}
+                    {{> card}}
+                {{/each}}
 
-                <a href="#">Add a card...</a>
+                <a href="javascript:void(0);" class="add-card" data-column="doing">Add a card...</a>
             </div>
         </div>
         <div class="span4">
@@ -87,11 +106,19 @@
                 <div class="page-header">
                     <h1>Done</h1>
                 </div>
+                {{#each done}}
+                    {{> card}}
+                {{/each}}
 
-                <a href="#">Add a card...</a>
+                <a href="javascript:void(0);" class="add-card" data-column="done">Add a card...</a>
             </div>
         </div>
     </div>
+    {{/with}}
+</template>
+
+<template name="card">
+    <div class="well card">{{title}}</div>
 </template>
 
 <template name="about">
