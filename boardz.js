@@ -94,12 +94,18 @@ if (Meteor.is_client) {
 
                 board.todo = cards.filter(function(item) {
                     return ids.todo.indexOf(item.id) > -1;
+                }).sort(function (a, b) {
+                    return ids.todo.indexOf(a.id) - ids.todo.indexOf(b.id);
                 });
                 board.doing = cards.filter(function(item) {
                     return ids.doing.indexOf(item.id) > -1;
+                }).sort(function (a, b) {
+                    return ids.doing.indexOf(a.id) - ids.doing.indexOf(b.id);
                 });
                 board.done = cards.filter(function(item) {
                     return ids.done.indexOf(item.id) > -1;
+                }).sort(function (a, b) {
+                    return ids.done.indexOf(a.id) - ids.done.indexOf(b.id);
                 });
 
                 Boards.update({_id: board._id}, board);
