@@ -7,3 +7,8 @@ body {
 .card{
     background-color: #e0e0ff;
 }
+
+.sortable{
+    min-height: 50px;
+    width: 100%;
+}
